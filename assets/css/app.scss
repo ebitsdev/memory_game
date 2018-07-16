@@ -1,0 +1,25 @@
+---
+---
+ /** Inspired from here https://css-tricks.com/css-grid-replace-flexbox/ **/
+  .card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    width: 60rem;
+  }
+  .card {
+    min-height: 100px;
+    background: rgba(4, 117, 223, 0.692);
+    flex: calc(100% / 4);
+    text-align: center;
+    line-height: 100px;
+    border: 5px solid white;
+
+  }
+
+  * {
+    box-sizing: border-box;
+  }
