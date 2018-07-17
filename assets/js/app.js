@@ -1,10 +1,10 @@
 /*
- * Create a list that holds all of your cards
+ * Create a list that holds all of your deck
  */
 
 /*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
+ * Display the deck on the page
+ *   - shuffle the list of deck using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
@@ -26,34 +26,31 @@ function shuffle(array) {
     return array;
 }
 function createDeck() {
-    const cards = document.createElement('div');
+    const container = document.createElement('div');
+    const deck = document.createElement('div');
 
     for (let i = 1; i <= 16; i++) {
         const mycard = document.createElement('div');
         const myitem = document.createElement('i');
-        cards
-            .classList
-            .add('card-deck');
-        mycard
-            .classList
-            .add('card');
-        myitem
-            .classList
-            .add('fa');
+        container.classList.add('container');
+        deck.classList.add('deck');
+        mycard.classList.add('card');
+        myitem.classList.add('fa');
         // mycard.textContent = 'Testing only ';
-        cards.appendChild(mycard);
+        container.appendChild(deck);
+        deck.appendChild(mycard);
         mycard.appendChild(myitem);
         let b = document.querySelector('body');
-        b.appendChild(cards);
+        b.appendChild(container);
     }
     assignClass();
     getElems();
     displayCard();
-    return cards;
+    return deck;
 }
 createDeck();
 
-/** Dynamically assign classes to the cards */
+/** Dynamically assign classes to the deck */
 function assignClass() {
     const myClasses = [
         'fa-diamond',
@@ -71,37 +68,50 @@ function assignClass() {
         } else {
             $(this).addClass(myClasses[i - 8]);
         }
-    })
-};
+    });
+}
 
-function displayCard(){
-    const myCard = document.querySelector('div');
-    myCard.style.backgroundColor = "red";
+function displayCard() {
+    const items = document.querySelectorAll('.card');
+    let openCards = [];
+    const openDeck = document.createElement('div');
+    items.forEach(function (item) {
+        item.onclick = function () {
+            openCards.push(item);
+            item.style.color = 'white';
+            item.style.fontSize = '33px';
+            const bd = document.querySelector('body');
+            openDeck.classList.add('open');
+            // openDeck.style.backgroundColor = "#b0c0b0";
+            bd.appendChild(openDeck);
+        }
+
+    });
 }
 
 function getElems() {
     const allElem = document.querySelector('div');
     allElem.addEventListener('click', function () {
-        console.dir('You just clicked me!');
+    //    allElem.style.transform = 45;
     });
 }
 
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call
+ *  - add the card to a *list* of "open" deck (put this functionality in another function that you call from this one)
+ *  - if the list already has another card, check to see if the two deck match
+ *    + if the deck do match, lock the deck in the open position (put this functionality in another function that you call
  *  from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality
+ *    + if the deck do not match, remove the deck from the list and hide the card's symbol (put this functionality
  *  in another function that you call from this one)
  *    + increment the move counter and display it on the page (put this functionality in another function that you call
  *  from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function
+ *    + if all deck have matched, display a message with the final score (put this functionality in another function
  * that you call from this one)
  */
 /**
- *  Memory Game Logic: The game randomly shuffles the cards. A user wins once all cards have successfully been matched.
+ *  Memory Game Logic: The game randomly shuffles the deck. A user wins once all deck have successfully been matched.
  *  Congratulations Popup: When a user wins the game, a modal appears to congratulate the player and ask if they want to
  *  play again. It should also tell the user how much time it took to win the game, and what the star rating was.
     Restart Button: A restart button allows the player to reset the game board, the timer, and the star rating.

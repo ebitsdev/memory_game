@@ -1,25 +1,45 @@
 ---
 ---
  /** Inspired from here https://css-tricks.com/css-grid-replace-flexbox/ **/
-  .card-deck {
+ .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+  .deck {
+    width: 660px;
+    min-height: 680px;
+    background: linear-gradient(160deg, #0796d8 0%, #d8a10a 100%);
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(54, 76, 95, 0.5);
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    margin-right: auto;
-    margin-left: auto;
-    width: 60rem;
+    margin: 0 0 3em;
   }
   .card {
-    min-height: 100px;
-    background: rgba(4, 117, 223, 0.692);
-    flex: calc(100% / 4);
-    text-align: center;
-    line-height: 100px;
-    border: 5px solid white;
-
+    height: 125px;
+    width: 125px;
+    background: #293844;
+    font-size: 0;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
   }
-
+  .open {
+    background-color: #0796d8;
+    width: 225px;
+    height: 225px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(54, 76, 95, 0.5);
+  }
   * {
     box-sizing: border-box;
   }
