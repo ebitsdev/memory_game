@@ -85,6 +85,7 @@ function displayCard() {
             // openDeck.style.backgroundColor = "#b0c0b0";
             bd.appendChild(openDeck);
         }
+        // https://3dtransforms.desandro.com/card-flip get some info from here
 
     });
 }
