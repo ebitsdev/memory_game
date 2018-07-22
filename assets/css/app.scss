@@ -33,6 +33,17 @@
     align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
   }
+  .footer-main{
+    list-style: none;
+    text-align: center;
+    text-decoration: none;
+    li {
+      display: inline-block;
+      a {
+        text-decoration: none;
+      }
+    }
+  }
   .open {
     background-color: #0796d8;
     width: 225px;
