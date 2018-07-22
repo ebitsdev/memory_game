@@ -10,10 +10,10 @@
   .deck {
     width: 660px;
     min-height: 680px;
-    background: linear-gradient(160deg, #0796d8 0%, #d8a10a 100%);
+    background: linear-gradient(160deg, dodgerblue 0%, rgba(44, 113, 182, 0.247) 100%);
     padding: 32px;
     border-radius: 10px;
-    box-shadow: 12px 15px 20px 0 rgba(54, 76, 95, 0.5);
+    box-shadow: 12px 15px 20px 0 rgba(16, 115, 202, 0.5);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -23,7 +23,7 @@
   .card {
     height: 125px;
     width: 125px;
-    background: #293844;
+    background: #06355c;
     font-size: 0;
     color: #ffffff;
     border-radius: 8px;
@@ -40,6 +40,7 @@
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(54, 76, 95, 0.5);
     display: flex;
+    cursor: pointer;
     justify-self: center;
     align-items: center;
   }

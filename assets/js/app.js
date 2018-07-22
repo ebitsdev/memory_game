@@ -78,6 +78,11 @@ function displayCard() {
     items.forEach(function (item) {
         item.onclick = function () {
             openCards.push(item);
+            if (openDeck.className === "open"){
+                alert('The class name is different');
+            } else {
+                alert(item.className);
+            }
             item.style.color = 'white';
             item.style.fontSize = '33px';
             const bd = document.querySelector('body');
