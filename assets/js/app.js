@@ -44,7 +44,7 @@ function createDeck() {
         b.appendChild(container);
     }
     assignClass();
-    getElems();
+    // getElems();
     displayCard();
     return deck;
 }
@@ -70,35 +70,34 @@ function assignClass() {
         }
     });
 }
-
+function removeCard() {
+    const el = document.querySelector('i');
+    el.remove();
+}
 function displayCard() {
     const items = document.querySelectorAll('.card');
     let openCards = [];
     const openDeck = document.createElement('div');
     items.forEach(function (item) {
         item.onclick = function () {
-            openCards.push(item);
-            if (openDeck.className === "open"){
-                alert('The class name is different');
-            } else {
-                alert(item.className);
+            if (item.className !== "open"){
+                item.classList.add('open');
+                openCards.push(item);        }
+            if (openCards.length !== null && this.className !== item.className){
+                removeCard();
+            }
+             else {
+                console.log("No open card");
             }
             item.style.color = 'white';
             item.style.fontSize = '33px';
             const bd = document.querySelector('body');
-            openDeck.classList.add('open');
+
             // openDeck.style.backgroundColor = "#b0c0b0";
             bd.appendChild(openDeck);
         }
         // https://3dtransforms.desandro.com/card-flip get some info from here
 
-    });
-}
-
-function getElems() {
-    const allElem = document.querySelector('div');
-    allElem.addEventListener('click', function () {
-    //    allElem.style.transform = 45;
     });
 }
 
