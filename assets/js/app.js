@@ -10,6 +10,7 @@
  */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
+
 function shuffle(array) {
     var currentIndex = array.length,
         temporaryValue,
@@ -25,6 +26,7 @@ function shuffle(array) {
 
     return array;
 }
+
 function createDeck() {
     const container = document.createElement('div');
     const deck = document.createElement('div');
@@ -44,13 +46,13 @@ function createDeck() {
         b.appendChild(container);
     }
     assignClass();
-    // getElems();
     displayCard();
     return deck;
 }
 createDeck();
 
 /** Dynamically assign classes to the deck */
+
 function assignClass() {
     const myClasses = [
         'fa-diamond',
@@ -70,10 +72,12 @@ function assignClass() {
         }
     });
 }
+
 function removeCard() {
     const el = document.querySelector('i');
     el.remove();
 }
+
 function displayCard() {
     const items = document.querySelectorAll('.card');
     let openCards = [];
@@ -106,13 +110,13 @@ function displayCard() {
  *  - display the card's symbol (put this functionality in another function that you call from this one)
  *  - add the card to a *list* of "open" deck (put this functionality in another function that you call from this one)
  *  - if the list already has another card, check to see if the two deck match
- *    + if the deck do match, lock the deck in the open position (put this functionality in another function that you call
+ *    if the deck do match, lock the deck in the open position (put this functionality in another function that you call
  *  from this one)
- *    + if the deck do not match, remove the deck from the list and hide the card's symbol (put this functionality
+ *    if the deck do not match, remove the deck from the list and hide the card's symbol (put this functionality
  *  in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call
+ *    increment the move counter and display it on the page (put this functionality in another function that you call
  *  from this one)
- *    + if all deck have matched, display a message with the final score (put this functionality in another function
+ *    if all deck have matched, display a message with the final score (put this functionality in another function
  * that you call from this one)
  */
 /**
