@@ -42,7 +42,11 @@ function keepOpenCardsCount(cardArray, card){
     cardArray.push(card);
     return cardArray;
 }
-
+// Display opencard symbol
+function displayOpenCard(openCard){
+    //Let's add some class to the clicked card
+    openCard.classList.add('open', 'show');
+}
 function manipulateCards() {
     var openCards = [];
     let deck = document.querySelector('.deck');
@@ -51,12 +55,11 @@ function manipulateCards() {
     deckOfCards.forEach(function (singleCard) {
         singleCard.addEventListener('click', function (ev) {
 
-        //Let's add some class to the clicked card
-        singleCard.classList.add('open', 'show');
+        displayOpenCard(singleCard);
 
         // Add the clicked cards to the openCards array
         keepOpenCardsCount(openCards, singleCard);
-
+            // console.log(openCards);
         });
 
     });
