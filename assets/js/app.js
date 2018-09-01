@@ -37,16 +37,28 @@ function shuffle(array) {
  */
 let deckOfCards = document.querySelectorAll('.card');
 
+// Function to keep openCards count
+function keepOpenCardsCount(cardArray, card){
+    cardArray.push(card);
+    return cardArray;
+}
+
 function manipulateCards() {
+    var openCards = [];
     let deck = document.querySelector('.deck');
 
     // deck.addEventListener('click', function(cE){
     deckOfCards.forEach(function (singleCard) {
         singleCard.addEventListener('click', function (ev) {
+
         //Let's add some class to the clicked card
         singleCard.classList.add('open', 'show');
 
+        // Add the clicked cards to the openCards array
+        keepOpenCardsCount(openCards, singleCard);
+
         });
+
     });
 }
 manipulateCards();
