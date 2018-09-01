@@ -35,8 +35,33 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-let deckOfCards = document.querySelectorAll('.card');
 
+let allCards = [
+            'fa-diamond', 'fa-diamond',
+            'fa-paper-plane-o', 'fa-paper-plane-o',
+            'fa-anchor', 'fa-anchor',
+            'fa-bolt', 'fa-bolt',
+            'fa-cube', 'fa-cube',
+            'fa-bicycle', 'fa-bicycle',
+            'fa-bomb', 'fa-bomb',
+            'fa-leaf', 'fa-leaf'
+];
+
+//
+function startGame(){
+    let deck = document.querySelector('.deck');
+    let cardElements = shuffle(allCards.map(function(singleCard){
+        return createCard(singleCard);
+    }));
+    deck.innerHTML = cardElements.join('');
+}
+startGame();
+function createCard(singleCard){
+
+    return '<li class="card"><i class="fa ' + singleCard + '"></i></li>';
+
+}
+let deckOfCards = document.querySelectorAll('.card');
 // Function to keep openCardArray count
 function keepOpenCardArrayopenCardArrayCount(cardArray, card) {
     cardArray.push(card);
