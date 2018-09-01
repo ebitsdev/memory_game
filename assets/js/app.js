@@ -37,29 +37,45 @@ function shuffle(array) {
  */
 let deckOfCards = document.querySelectorAll('.card');
 
-// Function to keep openCards count
-function keepOpenCardsCount(cardArray, card){
+// Function to keep openCardArray count
+function keepOpenCardArrayopenCardArrayCount(cardArray, card) {
     cardArray.push(card);
     return cardArray;
 }
 // Display opencard symbol
-function displayOpenCard(openCard){
+function displayOpenCard(openCard) {
     //Let's add some class to the clicked card
     openCard.classList.add('open', 'show');
 }
+
+function lockMatchedCards() {
+
+}
+
 function manipulateCards() {
-    var openCards = [];
+    var openCardArray = [];
     let deck = document.querySelector('.deck');
 
     // deck.addEventListener('click', function(cE){
     deckOfCards.forEach(function (singleCard) {
         singleCard.addEventListener('click', function (ev) {
-
-        displayOpenCard(singleCard);
-
-        // Add the clicked cards to the openCards array
-        keepOpenCardsCount(openCards, singleCard);
-            // console.log(openCards);
+            if (!singleCard.classList.contains('show') && !singleCard.classList.contains('open') && !singleCard.classList.contains('match')) {
+                keepOpenCardArrayopenCardArrayCount(openCardArray, singleCard);
+                displayOpenCard(singleCard);
+                if (openCardArray.length === 2) {
+                    setTimeout(function () {
+                        openCardArray.forEach(function (singleCard) {
+                            singleCard.classList.remove('open', 'show');
+                        });
+                        //Empty openCardArray after the timeout
+                        openCardArray = [];
+                    }, 1000);
+                } //else
+                // {
+            }
+            // }
+            // Add the clicked cards to the openCardArray array
+            // console.log(openCardArray);
         });
 
     });
