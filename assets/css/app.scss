@@ -110,3 +110,11 @@ h1 {
   float: right;
   cursor: pointer;
 }
+.footer-main{
+  text-align: center;
+  ul li {
+
+    display: inline-block;
+    list-style: none;
+  }
+}
