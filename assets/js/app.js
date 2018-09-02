@@ -59,6 +59,19 @@ function startGame() {
 // Call start game function
 startGame();
 
+function restartGame(){
+    let deckOfCards = document.querySelectorAll('.card');
+    document.querySelector('.restart').addEventListener('click', reset, false);
+
+    function reset(ev){
+        if (ev.target.classList.contains('fa-repeat')){
+            deckOfCards.forEach(function(card){
+                card.classList.remove('match');
+            });
+        }
+    }
+}
+restartGame();
 // Create card model
 function createCard(singleCard) {
 
@@ -110,7 +123,7 @@ function cardHandler(ev){
             if (!card.classList.contains('show') && !card.classList.contains('open') && !card.classList.contains('match')) {
                 //Keep record of clicked cards
                 displayOpenCard(card);
-                
+
                 //Flip open cards when there are more than two
 
                 if (clickedCards.length === 2) {
