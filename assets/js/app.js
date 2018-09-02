@@ -46,7 +46,7 @@ let allCards = [
     'fa-bomb', 'fa-bomb',
     'fa-leaf', 'fa-leaf'
 ];
-
+var moves = 0;
 //
 function startGame() {
     let deck = document.querySelector('.deck');
@@ -59,11 +59,20 @@ startGame();
 // Create card model
 function createCard(singleCard) {
 
-    return '<li class="card"><i class="fa ' + singleCard + '"></i></li>';
+    return '<li class="card" data-card="'+singleCard+'"><i class="fa ' + singleCard + '"></i></li>';
 
 }
-// select all cards
-let deckOfCards = document.querySelectorAll('.card');
+
+function winningMessage(){
+    var matchedCards = [];
+    var allMatchedCards = document.querySelectorAll('.match');
+    allMatchedCards.forEach(function(matchedCard){
+        matchedCards.push(matchedCard);
+    });
+    if (matchedCards.length === 16){
+    alert("Congratulations, you won!");
+    }
+}
 
 // Function to keep openCardArray count
 function keepOpenCardsCount(cardArray, card) {
@@ -76,66 +85,36 @@ function displayOpenCard(openCard) {
     openCard.classList.add('open', 'show');
 }
 
-function lockMatchedCards() {
+function lockMatchedCards(firstCard, secondCard) {
+
+        firstCard.classList.add('match');
+        secondCard.classList.add('match');
 
 }
 
-function eventHandler() {
-    let parentElement = document.querySelector('.deck');
-    parentElement.addEventListener('click', function (event) {
-        if (event.target.classList.contains('match')) {
-            console.log(event.target);
-        };
-    }, false);
-}
-
-eventHandler();
-
-// function manipulateCards() {
-//     var openCardArray = [];
-//     let deck = document.querySelector('.deck');
-//     // deck.addEventListener('click', eHandler, false);
-
-//     // deck.addEventListener('click', function(cE){
-//     deckOfCards.forEach(function (singleCard) {
-//         singleCard.addEventListener('click', function (ev) {
-//             if (!singleCard.classList.contains('show') && !singleCard.classList.contains('open') && !singleCard.classList.contains('match')) {
-//                 keepOpenCardArrayopenCardArrayCount(openCardArray, singleCard);
-//                 displayOpenCard(singleCard);
-//                 if (openCardArray.length === 2) {
-//                     setTimeout(function () {
-//                         openCardArray.forEach(function (singleCard) {
-//                             singleCard.classList.remove('open', 'show');
-//                         });
-//                         //Empty openCardArray after the timeout
-//                         openCardArray = [];
-//                     }, 1000);
-//                 } //else
-//                 // {
-//             }
-//             // }
-//             // Add the clicked cards to the openCardArray array
-//             // console.log(openCardArray);
-//         });
-
-//     });
-// }
-// manipulateCards();
 function getClickedCards() {
-    // var clickedCards = [];
+var moveCounter = document.querySelector('.moves');
+
+// var clickedCards = [];
 function cardHandler(ev){
 
     var cards = document.querySelectorAll('.card');
     cards.forEach(function (card) {
         let openCard = ev.target;
         if (openCard === card) {
+
             // clickedCards.push(openCard);
             keepOpenCardsCount(clickedCards, openCard);
             if (!card.classList.contains('show') && !card.classList.contains('open') && !card.classList.contains('match')) {
                 //Keep record of clicked cards
                 displayOpenCard(card);
                 //Flip open cards when there are more than two
+
                 if (clickedCards.length === 2) {
+                    if (clickedCards[0].dataset.card === clickedCards[1].dataset.card){
+                    // Lock matched cards
+                       lockMatchedCards(clickedCards[0], clickedCards[1]);
+                    }
                     setTimeout(function () {
                         clickedCards.forEach(function (card) {
                             card.classList.remove('open', 'show');
@@ -144,10 +123,18 @@ function cardHandler(ev){
                         clickedCards = [];
                     }, 1000);
                 }
+
+                // Increment moves
+                moves += 1;
+                //Display move counts
+                moveCounter.innerText = moves;
+                winningMessage();
             }
         }
     });
-    console.log(clickedCards);
+    // console.log(clickedCards);
+    // Stop event propagation
+    ev.stopPropagation();
 }
     let myDeck = document.querySelector('.deck');
     var clickedCards = [];
