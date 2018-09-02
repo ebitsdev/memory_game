@@ -37,27 +37,27 @@ function shuffle(array) {
  */
 
 let allCards = [
-            'fa-diamond', 'fa-diamond',
-            'fa-paper-plane-o', 'fa-paper-plane-o',
-            'fa-anchor', 'fa-anchor',
-            'fa-bolt', 'fa-bolt',
-            'fa-cube', 'fa-cube',
-            'fa-bicycle', 'fa-bicycle',
-            'fa-bomb', 'fa-bomb',
-            'fa-leaf', 'fa-leaf'
+    'fa-diamond', 'fa-diamond',
+    'fa-paper-plane-o', 'fa-paper-plane-o',
+    'fa-anchor', 'fa-anchor',
+    'fa-bolt', 'fa-bolt',
+    'fa-cube', 'fa-cube',
+    'fa-bicycle', 'fa-bicycle',
+    'fa-bomb', 'fa-bomb',
+    'fa-leaf', 'fa-leaf'
 ];
 
 //
-function startGame(){
+function startGame() {
     let deck = document.querySelector('.deck');
-    let cardElements = shuffle(allCards.map(function(singleCard){
+    let cardElements = shuffle(allCards.map(function (singleCard) {
         return createCard(singleCard);
     }));
     deck.innerHTML = cardElements.join('');
 }
 startGame();
 // Create card model
-function createCard(singleCard){
+function createCard(singleCard) {
 
     return '<li class="card"><i class="fa ' + singleCard + '"></i></li>';
 
@@ -66,7 +66,7 @@ function createCard(singleCard){
 let deckOfCards = document.querySelectorAll('.card');
 
 // Function to keep openCardArray count
-function keepOpenCardArrayopenCardArrayCount(cardArray, card) {
+function keepOpenCardsCount(cardArray, card) {
     cardArray.push(card);
     return cardArray;
 }
@@ -80,10 +80,10 @@ function lockMatchedCards() {
 
 }
 
-function eventHandler(){
+function eventHandler() {
     let parentElement = document.querySelector('.deck');
-    parentElement.addEventListener('click', function(event){
-        if (event.target.classList.contains('match')){
+    parentElement.addEventListener('click', function (event) {
+        if (event.target.classList.contains('match')) {
             console.log(event.target);
         };
     }, false);
@@ -91,62 +91,68 @@ function eventHandler(){
 
 eventHandler();
 
-function manipulateCards() {
-    var openCardArray = [];
-    let deck = document.querySelector('.deck');
-    // deck.addEventListener('click', eHandler, false);
+// function manipulateCards() {
+//     var openCardArray = [];
+//     let deck = document.querySelector('.deck');
+//     // deck.addEventListener('click', eHandler, false);
 
-    // deck.addEventListener('click', function(cE){
-    deckOfCards.forEach(function (singleCard) {
-        singleCard.addEventListener('click', function (ev) {
-            if (!singleCard.classList.contains('show') && !singleCard.classList.contains('open') && !singleCard.classList.contains('match')) {
-                keepOpenCardArrayopenCardArrayCount(openCardArray, singleCard);
-                displayOpenCard(singleCard);
-                if (openCardArray.length === 2) {
-                    setTimeout(function () {
-                        openCardArray.forEach(function (singleCard) {
-                            singleCard.classList.remove('open', 'show');
-                        });
-                        //Empty openCardArray after the timeout
-                        openCardArray = [];
-                    }, 1000);
-                } //else
-                // {
-            }
-            // }
-            // Add the clicked cards to the openCardArray array
-            // console.log(openCardArray);
-        });
+//     // deck.addEventListener('click', function(cE){
+//     deckOfCards.forEach(function (singleCard) {
+//         singleCard.addEventListener('click', function (ev) {
+//             if (!singleCard.classList.contains('show') && !singleCard.classList.contains('open') && !singleCard.classList.contains('match')) {
+//                 keepOpenCardArrayopenCardArrayCount(openCardArray, singleCard);
+//                 displayOpenCard(singleCard);
+//                 if (openCardArray.length === 2) {
+//                     setTimeout(function () {
+//                         openCardArray.forEach(function (singleCard) {
+//                             singleCard.classList.remove('open', 'show');
+//                         });
+//                         //Empty openCardArray after the timeout
+//                         openCardArray = [];
+//                     }, 1000);
+//                 } //else
+//                 // {
+//             }
+//             // }
+//             // Add the clicked cards to the openCardArray array
+//             // console.log(openCardArray);
+//         });
 
-    });
-}
+//     });
+// }
 // manipulateCards();
+function getClickedCards() {
+    // var clickedCards = [];
+function cardHandler(ev){
 
-function getClickedCards(){
-
-let myDeck = document.querySelector('.deck');
-
-var clickedCards = [];
-
-myDeck.addEventListener('click', function(ev){
     var cards = document.querySelectorAll('.card');
-    cards.forEach(function(card){
-        if (ev.target === card){
-            clickedCards.push(ev.target);
-        if (!card.classList.contains('show') && !card.classList.contains('open') && !card.classList.contains('match')){
-            displayOpenCard(card);
-            if (clickedCards.length === 2) {
-                setTimeout(function () {
-                    clickedCards.forEach(function (card) {
-                        card.classList.remove('open', 'show');
-                    });
-                    //Empty clickedCardsArray after the timeout
-                    clickedCards = [];
-                }, 1000);
+    cards.forEach(function (card) {
+        let openCard = ev.target;
+        if (openCard === card) {
+            // clickedCards.push(openCard);
+            keepOpenCardsCount(clickedCards, openCard);
+            if (!card.classList.contains('show') && !card.classList.contains('open') && !card.classList.contains('match')) {
+                //Keep record of clicked cards
+                displayOpenCard(card);
+                //Flip open cards when there are more than two
+                if (clickedCards.length === 2) {
+                    setTimeout(function () {
+                        clickedCards.forEach(function (card) {
+                            card.classList.remove('open', 'show');
+                        });
+                        //Empty clickedCardsArray after the timeout
+                        clickedCards = [];
+                    }, 1000);
+                }
             }
         }
-    }
     });
     console.log(clickedCards);
-});}
+}
+    let myDeck = document.querySelector('.deck');
+    var clickedCards = [];
+    // Create single listener on parent ul
+    myDeck.addEventListener('click', cardHandler, false);
+}
+
 getClickedCards();
