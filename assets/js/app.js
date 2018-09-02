@@ -47,7 +47,7 @@ let allCards = [
     'fa-leaf', 'fa-leaf'
 ];
 var moves = 0;
-//
+// Start game function
 function startGame() {
     let deck = document.querySelector('.deck');
     let cardElements = shuffle(allCards.map(function (singleCard) {
@@ -55,7 +55,10 @@ function startGame() {
     }));
     deck.innerHTML = cardElements.join('');
 }
+
+// Call start game function
 startGame();
+
 // Create card model
 function createCard(singleCard) {
 
@@ -85,11 +88,10 @@ function displayOpenCard(openCard) {
     openCard.classList.add('open', 'show');
 }
 
+// Function to lock matched cards
 function lockMatchedCards(firstCard, secondCard) {
-
         firstCard.classList.add('match');
         secondCard.classList.add('match');
-
 }
 
 function getClickedCards() {
@@ -108,6 +110,7 @@ function cardHandler(ev){
             if (!card.classList.contains('show') && !card.classList.contains('open') && !card.classList.contains('match')) {
                 //Keep record of clicked cards
                 displayOpenCard(card);
+                
                 //Flip open cards when there are more than two
 
                 if (clickedCards.length === 2) {
@@ -132,14 +135,15 @@ function cardHandler(ev){
             }
         }
     });
-    // console.log(clickedCards);
+
     // Stop event propagation
     ev.stopPropagation();
 }
+// Event listener for the deck of cards
     let myDeck = document.querySelector('.deck');
     var clickedCards = [];
     // Create single listener on parent ul
     myDeck.addEventListener('click', cardHandler, false);
 }
-
+// Get the cards that were clicked
 getClickedCards();
