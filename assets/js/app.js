@@ -50,21 +50,10 @@ let allCards = [
 //
 function startGame(){
     let deck = document.querySelector('.deck');
-    deck.addEventListener('click', eHandler, false);
-
     let cardElements = shuffle(allCards.map(function(singleCard){
         return createCard(singleCard);
     }));
     deck.innerHTML = cardElements.join('');
-}
-
-function eHandler(ev){
-    if (ev.target !== ev.currentTarget){
-        //Get the clicked element
-        let targetElement = ev.target;
-        console.log(targetElement);
-    };
-    ev.stopPropagation();
 }
 startGame();
 // Create card model
@@ -91,9 +80,21 @@ function lockMatchedCards() {
 
 }
 
+function eventHandler(){
+    let parentElement = document.querySelector('.deck');
+    parentElement.addEventListener('click', function(event){
+        if (event.target.classList.contains('match')){
+            console.log(event.target);
+        };
+    }, false);
+}
+
+eventHandler();
+
 function manipulateCards() {
     var openCardArray = [];
     let deck = document.querySelector('.deck');
+    // deck.addEventListener('click', eHandler, false);
 
     // deck.addEventListener('click', function(cE){
     deckOfCards.forEach(function (singleCard) {
@@ -119,4 +120,33 @@ function manipulateCards() {
 
     });
 }
-manipulateCards();
+// manipulateCards();
+
+function getClickedCards(){
+
+let myDeck = document.querySelector('.deck');
+
+var clickedCards = [];
+
+myDeck.addEventListener('click', function(ev){
+    var cards = document.querySelectorAll('.card');
+    cards.forEach(function(card){
+        if (ev.target === card){
+            clickedCards.push(ev.target);
+        if (!card.classList.contains('show') && !card.classList.contains('open') && !card.classList.contains('match')){
+            displayOpenCard(card);
+            if (clickedCards.length === 2) {
+                setTimeout(function () {
+                    clickedCards.forEach(function (card) {
+                        card.classList.remove('open', 'show');
+                    });
+                    //Empty clickedCardsArray after the timeout
+                    clickedCards = [];
+                }, 1000);
+            }
+        }
+    }
+    });
+    console.log(clickedCards);
+});}
+getClickedCards();
