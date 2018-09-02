@@ -50,18 +50,32 @@ let allCards = [
 //
 function startGame(){
     let deck = document.querySelector('.deck');
+    deck.addEventListener('click', eHandler, false);
+
     let cardElements = shuffle(allCards.map(function(singleCard){
         return createCard(singleCard);
     }));
     deck.innerHTML = cardElements.join('');
 }
+
+function eHandler(ev){
+    if (ev.target !== ev.currentTarget){
+        //Get the clicked element
+        let targetElement = ev.target;
+        console.log(targetElement);
+    };
+    ev.stopPropagation();
+}
 startGame();
+// Create card model
 function createCard(singleCard){
 
     return '<li class="card"><i class="fa ' + singleCard + '"></i></li>';
 
 }
+// select all cards
 let deckOfCards = document.querySelectorAll('.card');
+
 // Function to keep openCardArray count
 function keepOpenCardArrayopenCardArrayCount(cardArray, card) {
     cardArray.push(card);
