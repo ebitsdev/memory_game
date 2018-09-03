@@ -83,7 +83,20 @@ h1 {
   background: #02ccba;
   font-size: 33px;
 }
-
+@media only screen and (max-width: 600px) {
+  .deck .card.show {
+    font-size: 20px;
+  }
+  .deck .card {
+    height: 78px;
+    width: 78px;
+    margin-bottom: 5px;
+  }
+  .deck {
+    width: 414px;
+    min-height: auto;
+  }
+}
 /*
 * Styles for the Score Panel
 */

@@ -11,8 +11,9 @@
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length,
-        temporaryValue, randomIndex;
+    let currentIndex = array.length,
+        temporaryValue,
+        randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -35,8 +36,8 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-
-let allCards = [
+(function(){
+const allCards = [
     'fa-diamond', 'fa-diamond',
     'fa-paper-plane-o', 'fa-paper-plane-o',
     'fa-anchor', 'fa-anchor',
@@ -46,11 +47,11 @@ let allCards = [
     'fa-bomb', 'fa-bomb',
     'fa-leaf', 'fa-leaf'
 ];
-var moves = 0;
+let moves = 0;
 // Start game function
 function startGame() {
-    let deck = document.querySelector('.deck');
-    let cardElements = shuffle(allCards.map(function (singleCard) {
+    const deck = document.querySelector('.deck');
+    const cardElements = shuffle(allCards.map(function (singleCard) {
         return createCard(singleCard);
     }));
     deck.innerHTML = cardElements.join('');
@@ -60,18 +61,20 @@ function startGame() {
 startGame();
 
 function restartGame(){
-    let deckOfCards = document.querySelectorAll('.card');
+    const deckOfCards = document.querySelectorAll('.card');
+    const moveText = document.querySelector('.moves');
     document.querySelector('.restart').addEventListener('click', reset, false);
 
     function reset(ev){
         if (ev.target.classList.contains('fa-repeat')){
             deckOfCards.forEach(function(card){
                 card.classList.remove('match');
+                moveText.innerText = 'test';
             });
         }
     }
 }
-restartGame();
+
 // Create card model
 function createCard(singleCard) {
 
@@ -80,8 +83,8 @@ function createCard(singleCard) {
 }
 
 function winningMessage(){
-    var matchedCards = [];
-    var allMatchedCards = document.querySelectorAll('.match');
+    const matchedCards = [];
+    const allMatchedCards = document.querySelectorAll('.match');
     allMatchedCards.forEach(function(matchedCard){
         matchedCards.push(matchedCard);
     });
@@ -97,7 +100,7 @@ function keepOpenCardsCount(cardArray, card) {
 }
 // Display opencard symbol
 function displayOpenCard(openCard) {
-    //Let's add some class to the clicked card
+    //const's add some class to the clicked card
     openCard.classList.add('open', 'show');
 }
 
@@ -108,14 +111,14 @@ function lockMatchedCards(firstCard, secondCard) {
 }
 
 function getClickedCards() {
-var moveCounter = document.querySelector('.moves');
+const moveCounter = document.querySelector('.moves');
 
-// var clickedCards = [];
+// const clickedCards = [];
 function cardHandler(ev){
 
-    var cards = document.querySelectorAll('.card');
+    const cards = document.querySelectorAll('.card');
     cards.forEach(function (card) {
-        let openCard = ev.target;
+        const openCard = ev.target;
         if (openCard === card) {
 
             // clickedCards.push(openCard);
@@ -153,10 +156,12 @@ function cardHandler(ev){
     ev.stopPropagation();
 }
 // Event listener for the deck of cards
-    let myDeck = document.querySelector('.deck');
-    var clickedCards = [];
+    const myDeck = document.querySelector('.deck');
+    let clickedCards = [];
     // Create single listener on parent ul
     myDeck.addEventListener('click', cardHandler, false);
 }
 // Get the cards that were clicked
 getClickedCards();
+restartGame();
+})();
