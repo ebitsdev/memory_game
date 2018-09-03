@@ -131,3 +131,24 @@ h1 {
     list-style: none;
   }
 }
+.modal{
+  display: flex;
+  align-items: center;
+  .close-btn {
+    padding-left: 15px;
+  }
+  p {
+    align-content: center;
+  }
+  display: none;
+  z-index: 1;
+  position: relative;
+  width: 41rem;
+  height: 100px;
+  top: 5px;
+  left: 0;
+  margin: auto;
+  padding-left: 15px;
+  overflow-y: visible;
+  background-color: #02b3e4;
+}

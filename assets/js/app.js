@@ -36,6 +36,9 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+// This anonymous function to avoid exposing global variables
+
 (function(){
 const allCards = [
     'fa-diamond', 'fa-diamond',
@@ -48,7 +51,7 @@ const allCards = [
     'fa-leaf', 'fa-leaf'
 ];
 let moves = 0;
-// Start game function
+// The function to start playing the game
 function startGame() {
     const deck = document.querySelector('.deck');
     const cardElements = shuffle(allCards.map(function (singleCard) {
@@ -57,7 +60,7 @@ function startGame() {
     deck.innerHTML = cardElements.join('');
 }
 
-// Call start game function
+// Start playing the game
 startGame();
 
 function restartGame(){
@@ -69,13 +72,13 @@ function restartGame(){
         if (ev.target.classList.contains('fa-repeat')){
             deckOfCards.forEach(function(card){
                 card.classList.remove('match');
-                moveText.innerText = 'test';
+                moveText.innerText = '0';
             });
         }
     }
 }
 
-// Create card model
+// A card model to use in generating the deck of cards
 function createCard(singleCard) {
 
     return '<li class="card" data-card="'+singleCard+'"><i class="fa ' + singleCard + '"></i></li>';
@@ -88,8 +91,13 @@ function winningMessage(){
     allMatchedCards.forEach(function(matchedCard){
         matchedCards.push(matchedCard);
     });
-    if (matchedCards.length === 16){
-    alert("Congratulations, you won!");
+
+    //To show modal when a player wins
+    const message = document.getElementById('message');
+// Inspired from https://sabe.io/tutorials/how-to-create-modal-popup-box
+    if (matchedCards.length === 2){
+        message.innerText = "Congratulations, you won!"
+        message.showModal();
     }
 }
 
