@@ -37,6 +37,21 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+// Create a modal to show the winning message when a player wins
+function createModal(){
+
+    const modalContainer = document.createElement('div');
+    const modalContent = document.createElement('div');
+    modalContent.setAttribute("class", "modal-content");
+    modalContainer.appendChild(modalContent);
+    modalContainer.setAttribute("id", "modal");
+    const message = "Congratulations, you won!";
+    modalContainer.innerText = message;
+    //To show modal when a player wins
+    let container = document.querySelector('.container');
+    document.body.insertBefore(modalContainer, container);
+
+}
 // This anonymous function to avoid exposing global variables
 
 (function(){
@@ -91,13 +106,15 @@ function winningMessage(){
     allMatchedCards.forEach(function(matchedCard){
         matchedCards.push(matchedCard);
     });
-
-    //To show modal when a player wins
-    const message = document.getElementById('message');
+    // const modalContainer = document.createElement('div');
+    // const message = "Congratulations, you won!";
+    // modalContainer.innerText = message;
+    // //To show modal when a player wins
+    // let container = document.querySelector('.container');
+    // document.body.insertBefore(modalContainer, container);
 // Inspired from https://sabe.io/tutorials/how-to-create-modal-popup-box
     if (matchedCards.length === 2){
-        message.innerText = "Congratulations, you won!"
-        message.showModal();
+        createModal();
     }
 }
 
