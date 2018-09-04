@@ -121,11 +121,9 @@ function displayOpenCard(openCard) {
 
 // Reduce the number of stars as the number of moves increases
 function reduceStars(){
-    const stars = document.getElementById('stars');
-// continue from here
-    // stars.removeChild(stars.lastChild);
-    console.log(stars.childNodes);
-
+    const stars = document.querySelector('#stars');
+    // This removes the first star everytime it is invoked
+    stars.removeChild(stars.children[0]);
 }
 
 // Lock all the matched cards in place
@@ -196,6 +194,12 @@ function cardHandler(ev){
                 //Display move counts
                 moveCounter.innerText = moves;
                 winningMessage();
+                // Reduce the number of stars based on the number of moves by the player
+                if (moves === 15){
+                    reduceStars();
+                } if (moves === 25){
+                    reduceStars();
+                }
             }
         }
 
@@ -217,5 +221,4 @@ startGame();
 // Get the cards that were clicked
 getClickedCards();
 restartGame();
-reduceStars();
 })();
