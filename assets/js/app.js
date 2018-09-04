@@ -119,6 +119,15 @@ function displayOpenCard(openCard) {
     openCard.classList.add('open', 'show');
 }
 
+// Reduce the number of stars as the number of moves increases
+function reduceStars(){
+    const stars = document.getElementById('stars');
+// continue from here
+    // stars.removeChild(stars.lastChild);
+    console.log(stars.childNodes);
+
+}
+
 // Lock all the matched cards in place
 function lockMatchedCards(firstCard, secondCard) {
         firstCard.classList.add('match');
@@ -140,10 +149,10 @@ let timer = function(){
         timeBox.second++;
     }
 
-let myTime = String(timeBox.minute) + ':' + String(timeBox.second);
+let playingTime = String(timeBox.minute) + ':' + String(timeBox.second);
 //
 const mytimebox = document.getElementById('timebox');
-mytimebox.innerText = myTime;
+mytimebox.innerText = playingTime;
 }
 
 function getClickedCards() {
@@ -151,7 +160,7 @@ const moveCounter = document.querySelector('.moves');
 
 // Card event handler function to check if the open cards match or not
 function cardHandler(ev){
-    // To check if the timer is not set yet
+    // To check if the timer is not set yet and start the timer
     if (!timeBox.second){
         timer.go = setInterval(timer, 1000);
     }
@@ -207,6 +216,6 @@ function cardHandler(ev){
 startGame();
 // Get the cards that were clicked
 getClickedCards();
-
 restartGame();
+reduceStars();
 })();
