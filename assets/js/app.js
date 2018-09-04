@@ -74,10 +74,8 @@ function startGame() {
         return createCard(singleCard);
     }));
     deck.innerHTML = cardElements.join('');
-}
 
-// Start playing the game
-startGame();
+}
 
 function restartGame(){
     const deckOfCards = document.querySelectorAll('.card');
@@ -107,8 +105,6 @@ function winningMessage(){
 
     if (matchedCards.length === 2){
         createModal();
-        let modalDiv = document.querySelector('#modal');
-        console.log(modalDiv);
     }
 }
 
@@ -128,13 +124,37 @@ function lockMatchedCards(firstCard, secondCard) {
         firstCard.classList.add('match');
         secondCard.classList.add('match');
 }
+// create a timebox object to hold seconds and minutes
+
+let timeBox = {
+    second: 0,
+    minute: 0,
+    go: -1
+};
+
+let timer = function(){
+    if (timeBox.second === 59){
+        timeBox.minute++;
+        timeBox.second = 0;
+    } else {
+        timeBox.second++;
+    }
+
+let myTime = String(timeBox.minute) + ':' + String(timeBox.second);
+//
+const mytimebox = document.getElementById('timebox');
+mytimebox.innerText = myTime;
+}
 
 function getClickedCards() {
 const moveCounter = document.querySelector('.moves');
 
 // Card event handler function to check if the open cards match or not
 function cardHandler(ev){
-
+    // To check if the timer is not set yet
+    if (!timeBox.second){
+        timer.go = setInterval(timer, 1000);
+    }
     const cards = document.querySelectorAll('.card');
     cards.forEach(function (card) {
         const openCard = ev.target;
@@ -160,8 +180,8 @@ function cardHandler(ev){
                         //Empty clickedCardsArray after the timeout
                         clickedCards = [];
                     }, 1000);
-                }
 
+                }
                 // Increment moves
                 moves += 1;
                 //Display move counts
@@ -169,18 +189,24 @@ function cardHandler(ev){
                 winningMessage();
             }
         }
+
     });
 
     // Stop event propagation
     ev.stopPropagation();
+
 }
 // Function to listen for children that are clicked inside the deck of cards
     const myDeck = document.querySelector('.deck');
     let clickedCards = [];
     // Create single listener on parent ul
     myDeck.addEventListener('click', cardHandler, false);
+
 }
+//Start playing
+startGame();
 // Get the cards that were clicked
 getClickedCards();
+
 restartGame();
 })();
