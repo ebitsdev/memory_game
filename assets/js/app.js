@@ -42,15 +42,16 @@ function createModal(){
 
     const modalContainer = document.createElement('div');
     const modalContent = document.createElement('div');
+    const container = document.querySelector('.container');
+    let deck = document.querySelector('.deck');
+    modalContainer.setAttribute("id", "modal");
     modalContent.setAttribute("class", "modal-content");
     modalContainer.appendChild(modalContent);
-    modalContainer.setAttribute("id", "modal");
     const message = "Congratulations, you won!";
-    modalContainer.innerText = message;
-    //To show modal when a player wins
-    let container = document.querySelector('.container');
-    document.body.insertBefore(modalContainer, container);
+    modalContent.innerText = message;
+    //This serves to show the modal when a player wins
 
+    container.insertBefore(modalContainer, deck);
 }
 // This anonymous function to avoid exposing global variables
 
@@ -85,10 +86,7 @@ function restartGame(){
 
     function reset(ev){
         if (ev.target.classList.contains('fa-repeat')){
-            deckOfCards.forEach(function(card){
-                card.classList.remove('match');
-                moveText.innerText = '0';
-            });
+            location.reload();
         }
     }
 }
@@ -106,15 +104,11 @@ function winningMessage(){
     allMatchedCards.forEach(function(matchedCard){
         matchedCards.push(matchedCard);
     });
-    // const modalContainer = document.createElement('div');
-    // const message = "Congratulations, you won!";
-    // modalContainer.innerText = message;
-    // //To show modal when a player wins
-    // let container = document.querySelector('.container');
-    // document.body.insertBefore(modalContainer, container);
-// Inspired from https://sabe.io/tutorials/how-to-create-modal-popup-box
+
     if (matchedCards.length === 2){
         createModal();
+        let modalDiv = document.querySelector('#modal');
+        console.log(modalDiv);
     }
 }
 
@@ -123,13 +117,13 @@ function keepOpenCardsCount(cardArray, card) {
     cardArray.push(card);
     return cardArray;
 }
-// Display opencard symbol
+// To show the open card symbol for cards that are clicked
 function displayOpenCard(openCard) {
-    //const's add some class to the clicked card
+
     openCard.classList.add('open', 'show');
 }
 
-// Function to lock matched cards
+// Lock all the matched cards in place
 function lockMatchedCards(firstCard, secondCard) {
         firstCard.classList.add('match');
         secondCard.classList.add('match');
@@ -138,7 +132,7 @@ function lockMatchedCards(firstCard, secondCard) {
 function getClickedCards() {
 const moveCounter = document.querySelector('.moves');
 
-// const clickedCards = [];
+// Card event handler function to check if the open cards match or not
 function cardHandler(ev){
 
     const cards = document.querySelectorAll('.card');
@@ -180,7 +174,7 @@ function cardHandler(ev){
     // Stop event propagation
     ev.stopPropagation();
 }
-// Event listener for the deck of cards
+// Function to listen for children that are clicked inside the deck of cards
     const myDeck = document.querySelector('.deck');
     let clickedCards = [];
     // Create single listener on parent ul
