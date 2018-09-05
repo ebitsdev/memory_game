@@ -142,7 +142,7 @@ let timeBox = {
     minute: 0,
     go: -1
 };
-
+// Display a timer when a player starts playing
 let timer = function(){
     if (timeBox.second === 59){
         timeBox.minute++;
@@ -157,6 +157,7 @@ const mytimebox = document.getElementById('timebox');
 mytimebox.innerText = playingTime;
 }
 
+// Keeps counts of all clicked cards
 function getClickedCards() {
 const moveCounter = document.querySelector('.moves');
 
