@@ -131,29 +131,58 @@ h1 {
     list-style: none;
   }
 }
-.modal{
+#modal{
   display: flex;
+  position: absolute;
+  top: 7.5rem; // position the modal  container on top
+  width: 660px;
+  height: 680px;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 32px;
+  border-radius: 10px;
   align-items: center;
-  .close-btn {
-    padding-left: 15px;
-  }
-  p {
-    align-content: center;
-  }
-  display: none;
-  z-index: 1;
-  position: relative;
-  width: 41rem;
-  height: 100px;
-  top: 5px;
-  left: 0;
-  margin: auto;
-  padding-left: 15px;
-  overflow-y: visible;
-  background-color: #02b3e4;
+  justify-content: center;
+}
+.message-content{
+  font-size: 2rem;
+  font-weight: 700;
 }
 .modal-content {
-  background-color: dodgerblue;
-  border-radius: 4px;
-  padding: 20px;
+  display: flex;
+  background-color: rgb(255, 255, 255);
+  border-radius: 6%;
+  padding: 10px;
+  width: 450px;
+  height: 450px;
+  align-items: center;
+  justify-content: center;
+}
+#closebutton{
+  position: absolute;
+  top: 115px;
+  font-size: 50px;
+  transform: rotate(45deg);
+  right: 130px;
+  font-weight: 600;
+}
+@media only screen and (min-width: 320px) and (max-width: 660px){
+  .message-content{
+    font-size: 1.4rem;
+  }
+  #closebutton {
+    position: absolute;
+    top: 5.5rem;
+    font-size: 50px;
+    transform: rotate(45deg);
+    right: 4.5rem;
+    font-weight: 600;
+}
+#modal {
+  width: 25rem;
+  height: 30rem;
+}
+.modal-content {
+  width: 18rem;
+  height: 18rem;
+}
 }

@@ -43,15 +43,23 @@ function createModal(){
     const modalContainer = document.createElement('div');
     const modalContent = document.createElement('div');
     const container = document.querySelector('.container');
+    const closeButton = document.createElement('div');
+    closeButton.setAttribute('id', 'closebutton');
+    closeButton.innerText = '+'; //Rotate it to look more like an x
     let deck = document.querySelector('.deck');
     modalContainer.setAttribute("id", "modal");
     modalContent.setAttribute("class", "modal-content");
     modalContainer.appendChild(modalContent);
-    const message = "Congratulations, you won!";
-    modalContent.innerText = message;
+    const message = document.createElement('div');
+    message.classList.add('message-content');
+    message.innerText = "Congratulations, you won!";
+    modalContent.appendChild(closeButton);
+    modalContent.appendChild(message);
     //This serves to show the modal when a player wins
 
     container.insertBefore(modalContainer, deck);
+    // modalContent.insertBefore(message, closeButton);
+    // console.log(modalContent.children);
 }
 // This anonymous function to avoid exposing global variables
 
@@ -103,7 +111,7 @@ function winningMessage(){
         matchedCards.push(matchedCard);
     });
 
-    if (matchedCards.length === 16){
+    if (matchedCards.length === 2){
         createModal();
     }
 }
