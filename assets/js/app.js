@@ -39,13 +39,23 @@ function shuffle(array) {
 
 // Create a modal to show the winning message when a player wins
 function createModal(){
-    const modalContainerHTMLString = '<div class="modal-content"><div id="closebutton">+</div><div class="message-content">Congratulations, you won!</div></div>';
+    const modalContainerHTMLString = '<div id="modalcontent"><div id="closebutton">+</div><div class="message-content">Congratulations, you won!</div></div>';
     const modalContainer = document.createElement('div');
     const container = document.querySelector('.container');
     let deck = document.querySelector('.deck');
     modalContainer.setAttribute("id", "modal");
     modalContainer.innerHTML = modalContainerHTMLString;
     container.insertBefore(modalContainer, deck);
+}
+// Close modal or modal container
+function closeModal(ev){
+    const modal = document.getElementById('modal');
+    const modalCont = document.getElementById('modalcontent');
+    const closebtn = document.getElementById('closebutton');
+    if ( ev.target === modal || ev.target === modalCont || ev.target === closebtn){
+        modal.remove();
+        // console.log('You just clicked me');
+    }
 }
 // This anonymous function to avoid exposing global variables
 
@@ -97,7 +107,7 @@ function winningMessage(){
         matchedCards.push(matchedCard);
     });
 
-    if (matchedCards.length === 2){
+    if (matchedCards.length === 16){
         createModal();
     }
 }
@@ -205,10 +215,11 @@ function cardHandler(ev){
 }
 // Function to listen for children that are clicked inside the deck of cards
     const myDeck = document.querySelector('.deck');
+    const generalContainer = document.querySelector('.container');
     let clickedCards = [];
     // Create single listener on parent ul
     myDeck.addEventListener('click', cardHandler, false);
-
+    generalContainer.addEventListener('click', closeModal, false);
 }
 //Start playing
 startGame();

@@ -1,7 +1,20 @@
 ---
 ---
- /** Inspired from here https://css-tricks.com/css-grid-replace-flexbox/ **/
- html {
+/* roboto-regular - latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  src: url('./assets/fonts/roboto-v18-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Roboto'), local('Roboto-Regular'),
+       url('./assets/fonts/roboto-v18-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('./assets/fonts/roboto-v18-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('./assets/fonts/roboto-v18-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('./assets/fonts/roboto-v18-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('./assets/fonts/roboto-v18-latin-regular.svg#Roboto') format('svg'); /* Legacy iOS */
+}
+
+/** Inspired from here https://css-tricks.com/css-grid-replace-flexbox/ **/
+html {
   box-sizing: border-box;
 }
 
@@ -20,8 +33,9 @@ body {
 }
 
 body {
-  background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
-  font-family: 'Coda', cursive;
+  background: #ffffff url('../img/geometry2.png');
+  /* Background pattern from Subtle Patterns */
+  font-family: 'Roboto';
 }
 
 .container {
@@ -32,14 +46,13 @@ body {
 }
 
 h1 {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-weight: 700;
 }
 
 /*
 * Styles for the deck of cards
 */
-
 .deck {
   width: 660px;
   min-height: 680px;
@@ -83,24 +96,27 @@ h1 {
   background: #02ccba;
   font-size: 33px;
 }
+
 @media only screen and (max-width: 600px) {
   .deck .card.show {
     font-size: 20px;
   }
+
   .deck .card {
     height: 78px;
     width: 78px;
     margin-bottom: 5px;
   }
+
   .deck {
     width: 414px;
     min-height: auto;
   }
 }
+
 /*
 * Styles for the Score Panel
 */
-
 .score-panel {
   text-align: left;
   width: 345px;
@@ -123,18 +139,20 @@ h1 {
   float: right;
   cursor: pointer;
 }
-.footer-main{
-  text-align: center;
-  ul li {
 
+.footer-main {
+  text-align: center;
+
+  ul li {
     display: inline-block;
     list-style: none;
   }
 }
-#modal{
+
+#modal {
   display: flex;
   position: absolute;
-  top: 7.5rem; // position the modal  container on top
+  top: 6.9rem; // position the modal  container on top
   width: 660px;
   height: 680px;
   background-color: rgba(0, 0, 0, 0.7);
@@ -143,11 +161,13 @@ h1 {
   align-items: center;
   justify-content: center;
 }
-.message-content{
+
+.message-content {
   font-size: 2rem;
   font-weight: 700;
 }
-.modal-content {
+
+#modalcontent {
   display: flex;
   background-color: rgb(255, 255, 255);
   border-radius: 6%;
@@ -157,18 +177,22 @@ h1 {
   align-items: center;
   justify-content: center;
 }
-#closebutton{
+
+#closebutton {
   position: absolute;
   top: 115px;
   font-size: 50px;
   transform: rotate(45deg);
   right: 130px;
   font-weight: 600;
+  cursor: pointer;
 }
-@media only screen and (min-width: 320px) and (max-width: 660px){
-  .message-content{
+
+@media only screen and (min-width: 320px) and (max-width: 660px) {
+  .message-content {
     font-size: 1.4rem;
   }
+
   #closebutton {
     position: absolute;
     top: 5.5rem;
@@ -176,13 +200,15 @@ h1 {
     transform: rotate(45deg);
     right: 4.5rem;
     font-weight: 600;
-}
-#modal {
-  width: 25rem;
-  height: 25rem;
-}
-.modal-content {
-  width: 18rem;
-  height: 18rem;
-}
+  }
+
+  #modal {
+    width: 25rem;
+    height: 25rem;
+  }
+
+  #modalcontent {
+    width: 18rem;
+    height: 18rem;
+  }
 }
