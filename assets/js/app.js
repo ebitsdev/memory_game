@@ -103,7 +103,7 @@ function winningMessage(){
         matchedCards.push(matchedCard);
     });
 
-    if (matchedCards.length === 2){
+    if (matchedCards.length === 16){
         createModal();
     }
 }
