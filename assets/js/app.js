@@ -39,24 +39,24 @@ function shuffle(array) {
 
 // Create a modal to show the winning message when a player wins
 function createModal(){
-
+    const modalContainerHTMLString = '<div class="modal-content"><div id="closebutton">+</div><div class="message-content">Congratulations, you won!</div></div>';
     const modalContainer = document.createElement('div');
-    const modalContent = document.createElement('div');
+    // const modalContent = document.createElement('div');
     const container = document.querySelector('.container');
-    const closeButton = document.createElement('div');
-    closeButton.setAttribute('id', 'closebutton');
-    closeButton.innerText = '+'; //Rotate it to look more like an x
+    // const closeButton = document.createElement('div');
+    // closeButton.setAttribute('id', 'closebutton');
+    // closeButton.innerText = '+'; //Rotate it to look more like an x
     let deck = document.querySelector('.deck');
     modalContainer.setAttribute("id", "modal");
-    modalContent.setAttribute("class", "modal-content");
-    modalContainer.appendChild(modalContent);
-    const message = document.createElement('div');
-    message.classList.add('message-content');
-    message.innerText = "Congratulations, you won!";
-    modalContent.appendChild(closeButton);
-    modalContent.appendChild(message);
+    // modalContent.setAttribute("class", "modal-content");
+    // modalContainer.appendChild(modalContent);
+    // const message = document.createElement('div');
+    // message.classList.add('message-content');
+    // message.innerText = "Congratulations, you won!";
+    // modalContent.appendChild(closeButton);
+    // modalContent.appendChild(message);
     //This serves to show the modal when a player wins
-
+modalContainer.innerHTML = modalContainerHTMLString;
     container.insertBefore(modalContainer, deck);
     // modalContent.insertBefore(message, closeButton);
     // console.log(modalContent.children);
