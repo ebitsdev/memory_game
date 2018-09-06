@@ -72,6 +72,7 @@ const allCards = [
     'fa-leaf', 'fa-leaf'
 ];
 let moves = 0;
+let stopTimer;
 // The function to start playing the game
 function startGame() {
     const deck = document.querySelector('.deck');
@@ -100,7 +101,20 @@ function createCard(singleCard) {
     return '<li class="card" data-card="'+singleCard+'"><i class="fa ' + singleCard + '"></i></li>';
 
 }
+// Display a timer when a player starts playing
+let timer = function(){
+    if (timeBox.second === 59){
+        timeBox.minute++;
+        timeBox.second = 0;
+    } else {
+        timeBox.second++;
+    }
 
+let playingTime = String(timeBox.minute) + ':' + String(timeBox.second);
+//
+const mytimebox = document.getElementById('timebox');
+mytimebox.innerText = playingTime;
+}
 function winningMessage(){
     const matchedCards = [];
     const allMatchedCards = document.querySelectorAll('.match');
@@ -109,6 +123,7 @@ function winningMessage(){
     });
 
     if (matchedCards.length === 16){
+        clearTimeout(timer.go);
         createModal();
     }
 }
@@ -137,26 +152,11 @@ function lockMatchedCards(firstCard, secondCard) {
         secondCard.classList.add('match');
 }
 // create a timebox object to hold seconds and minutes
-
 let timeBox = {
     second: 0,
     minute: 0,
     go: -1
 };
-// Display a timer when a player starts playing
-let timer = function(){
-    if (timeBox.second === 59){
-        timeBox.minute++;
-        timeBox.second = 0;
-    } else {
-        timeBox.second++;
-    }
-
-let playingTime = String(timeBox.minute) + ':' + String(timeBox.second);
-//
-const mytimebox = document.getElementById('timebox');
-mytimebox.innerText = playingTime;
-}
 
 // Keeps counts of all clicked cards
 function getClickedCards() {
