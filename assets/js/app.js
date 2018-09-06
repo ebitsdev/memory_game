@@ -60,6 +60,7 @@ function closeModal(ev){
 // This anonymous function to avoid exposing global variables
 
 (function(){
+    'use stric';
 const allCards = [
     'fa-diamond', 'fa-diamond',
     'fa-paper-plane-o', 'fa-paper-plane-o',
